@@ -2,6 +2,7 @@
  * Created by ovsdb on 23/06/17.
  */
 
+/*
 var http = require('http');
 var url  = require('url');
 
@@ -15,4 +16,22 @@ http.createServer(function (req, res) {
     // res.end("My first server...");
 }).listen(port);
 
-console.log('Server is listening on http://localhost:'+port+'/');
+console.log('Server is listening on http://localhost:'+port+'/');*/
+
+var express     = require('express');
+var app         = express();
+var path        = require('path');
+
+const port = 15951;
+
+app.get('/Fecha', function(req, res){
+    res.sendFile(path.join(__dirname + '/hola.html'))
+});
+
+app.get('/Hola', function(req, res){
+    res.send('Hola pruebas')
+});
+
+app.listen(port, function(){
+    console.log('Server is listening on http://localhost:%s/', port);
+});
