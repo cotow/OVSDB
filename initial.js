@@ -18,9 +18,10 @@ http.createServer(function (req, res) {
 
 console.log('Server is listening on http://localhost:'+port+'/');*/
 
-var express     = require('express');
-var app         = express();
-var path        = require('path');
+var express     = require('express'),
+    app         = express(),
+    path        = require('path');
+
 
 const port = 15951;
 
@@ -28,10 +29,25 @@ app.get('/Fecha', function(req, res){
     res.sendFile(path.join(__dirname + '/hola.html'))
 });
 
-app.get('/Hola', function(req, res){
+app.get('/homepage', function(req, res){
+    res.sendFile(path.join(__dirname + '/entries.html'))
+});
+
+app.get('/process_get', function(req, res){
+    response = {
+        first_name:req.query.first_name,
+        last_name:req.query.last_name
+    };
+    console.log(response);
+    res.end(JSON.stringify(response));
+});
+
+app.get('/', function(req, res){
     res.send('Hola pruebas')
 });
 
-app.listen(port, function(){
-    console.log('Server is listening on http://localhost:%s/', port);
+var server = app.listen(port, function(){
+    var host = server.address().address;
+    var puerto = server.address().port;
+    console.log('Server is listening on http://%s:%s/', host, puerto);
 });
